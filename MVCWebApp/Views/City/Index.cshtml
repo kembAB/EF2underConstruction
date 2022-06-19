@@ -1,0 +1,57 @@
+﻿@model MVCWebApp.Models.City.AllCitiesViewModel
+
+@{ ViewData["Title"] = "City Index"; }
+<h1>City Index</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateCityViewModel.CityName" class="control-label"></label>
+                <input asp-for="CreateCityViewModel.CityName" class="form-control" />
+                <span asp-validation-for="CreateCityViewModel.CityName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCityViewModel.CountryName" class="control-label"></label>
+                <select asp-for="CreateCityViewModel.CountryName" class="form-control" asp-items="Model.CountryList"></select>
+                <span asp-validation-for="CreateCityViewModel.CountryName" class="text-danger"></span>
+            </div>
+            <div class="create-buttons">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row align-items-start">
+    <div class="col">
+        <h4>City Name</h4>
+    </div>
+
+    <div class="col">
+        <h4>Country Name</h4>
+    </div>
+
+    <div class="col">
+        <h4>Action</h4>
+    </div>
+</div>
+
+@foreach (var item in Model.CityList)
+{
+    <div class="row align-items-start">
+
+        <div class="col">
+            <p>@item.CityName</p>
+        </div>
+
+        <div class="col">
+            <p>@item.Country.CountryName</p>
+        </div>
+
+        <div class="col">
+            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger">Delete</a>
+        </div>
+
+    </div>}
